@@ -35,6 +35,13 @@ First, create a lastpass note at path `Personal/email-creds`, with contents like
 If you only have one inbox, and it's called `INBOX`, then set the `mailboxes`
 line to `""`. I like to have different inboxes for each of my mailing lists.
 
+If you're using gmail, you'll have to [enable 2 factor
+auth](https://support.google.com/accounts/answer/185839?hl=en), and [create an
+app specific
+password](https://support.google.com/accounts/answer/185833?hl=en). This is the
+password that you'll need to put in your creds -- *not* your regular google
+password.
+
 ### Get scripts
 
 Clone this repo somewhere, and add that somewhere to your path. For example:
