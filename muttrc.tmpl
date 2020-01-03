@@ -1,0 +1,30 @@
+# vim: set ft=muttrc
+cat <<EOF
+set realname = "$FULL_NAME"
+set from = "$EMAIL"
+set use_from = yes
+set envelope_from = yes
+
+set smtp_url = "smtps://$USERNAME@$SMTP_ADDRESS:$SMTP_PORT"
+set imap_user = "$USERNAME"
+set imap_pass = "$PASSWORD"
+set folder = "imaps://$IMAP_ADDRESS:993"
+set ssl_force_tls = yes
+set spoolfile = "+INBOX"
+mailboxes $MAILBOXES
+
+bind index G imap-fetch-mail
+bind index d read-subthread
+bind index J next-unread
+bind index K previous-unread
+
+macro index \cb "|urlview\n" "view URLs"
+macro pager \cb "|urlview\n" "view URLs"
+
+macro index \cG "|open-email-in-gmail\n" "Open in Gmail"
+macro index A "T~N\n;WN" "Mark All as Read"
+
+set editor = "vim"
+set charset = "utf-8"
+set record = ""
+EOF

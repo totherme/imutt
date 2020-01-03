@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+main() {
+  local fifo
+
+  check_dependencies
+
+  fifo="$(mktemp -u)"
+  mkfifo "$fifo"
+  generate_muttrc > "$fifo" &
+  best_mutt -F "$fifo" "${@}"
+}
+
+check_dependencies() {
+  if ! ( command -v mutt || command -v neomutt ) > /dev/null ; then
+    fail "We need mutt or neomutt"
+  fi
+
+  for cmd in mktemp mkfifo lpass jq ; do
+    if ! command -v "$cmd" > /dev/null ; then
+      fail "We need $cmd"
+    fi
+  done
+}
+
+generate_muttrc() {
+  local template_file config_json
+
+  config_json="$(get_config_from_lastpass)"
+  template_file="$(dirname "$0")/muttrc.tmpl"
+
+  FULL_NAME="$(get_var_from_config "$config_json" "user-full-name")" \
+  EMAIL="$(get_var_from_config "$config_json" "user-email-address")" \
+  SMTP_ADDRESS="$(get_var_from_config "$config_json" "smtp-address")" \
+  SMTP_PORT="$(get_var_from_config "$config_json" "smtp-port")" \
+  IMAP_ADDRESS="$(get_var_from_config "$config_json" "imap-address")" \
+  USERNAME="$(get_var_from_config "$config_json" "username")" \
+  PASSWORD="$(get_var_from_config "$config_json" "password")" \
+  MAILBOXES="$(get_var_from_config "$config_json" "mailboxes")" \
+    bash "$template_file"
+}
+
+best_mutt() {
+  if command -v neomutt > /dev/null ; then
+    neomutt "${@}"
+  else
+    mutt "${@}"
+  fi
+}
+
+get_config_from_lastpass() {
+  lpass show --notes Personal/email-creds
+}
+
+get_var_from_config() {
+  local config varname
+  config="${1:?Expected config json to get a variable from}"
+  varname="${2:?Expected a variable to get from the config}"
+
+  echo "$config" | jq -r ".\"$varname\""
+}
+
+fail() {
+  echo "${@}" >&2
+  exit 1
+}
+
+main "${@}"

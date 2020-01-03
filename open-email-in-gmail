@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+main() {
+  get_message_id | make_gmail_search_url | open_url_from_stdin
+}
+
+get_message_id() {
+  grep "^Message-I[dD]: "  | cut -d'<' -f2  | cut -d'>' -f1
+}
+
+make_gmail_search_url() {
+  local message_id
+  read -r message_id
+  echo "https://mail.google.com/mail/u/0/?ibxr=0#search/rfc822msgid:${message_id}"
+}
+
+open_url_from_stdin() {
+  local url opener
+
+  read -r url
+
+  case "${OSTYPE}" in
+    "linux-gnu") opener="xdg-open" ;;
+    "darwin") opener="open" ;;
+    "*") fail "unknown OS type" ;;
+  esac
+
+  ${opener} "$url"
+}
+
+fail() {
+  echo "${@}" >&2
+  exit 1
+}
+
+main "${@}"
