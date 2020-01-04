@@ -60,5 +60,4 @@ imutt
 ## One last thing
 
 If you happen to be using gmail to host your email, you might sometimes want to
-open a given email in the gmail web UI. You can do that with `^G` (hold control
-and shift, and tap G).
+open a given email in the gmail web UI. You can do that with `B`.
