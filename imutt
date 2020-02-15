@@ -39,6 +39,7 @@ generate_muttrc() {
   USERNAME="$(get_var_from_config "$config_json" "username")" \
   PASSWORD="$(get_var_from_config "$config_json" "password")" \
   MAILBOXES="$(get_var_from_config "$config_json" "mailboxes")" \
+  COLOUR_FILE="$(dirname "$0")/mutt/dracula.muttrc" \
     bash "$template_file"
 }
 
