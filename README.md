@@ -50,6 +50,8 @@ Clone this repo somewhere, and add that somewhere to your path. For example:
 
 ```bash
 git clone https://github.com/totherme/imutt.git ~/bin/imutt
+cd ~/bin/imutt
+git submodule update --init
 echo 'export PATH="$HOME/bin/imutt:$PATH' >> ~/.profile
 ```
 
