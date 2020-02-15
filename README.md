@@ -81,17 +81,20 @@ inbox-zero-like one. Here's my email workflow:
     email in my web browser in gmail. Here I can create a new filter so that the
     next time an email like this arrives, it will be filed correctly.
   + Of course I can reply with `r`, group reply with `g` and so on.
-- Open another inbox, or quit mutt. Either way, *all read emails will be moved
-  into an archive folder*. If I was just reading the folder `${MBOX}`, then the
+- Open another inbox, or quit mutt. Either way, **all read emails will be moved
+  into an archive folder**. If I was just reading the folder `${MBOX}`, then the
   read emails will be moved to `${MBOX}-archive`.
 
 ## Philosophy and limitations
 
-This config is intended to be fairly safe to use on pairing workstations. In
-that environment, we don't want to leave emails or creds on the local disk. For
-that reason, loading large inboxes can be annoyingly slow. And so, it makes
-sense to develop a habit of keeping "read mail" in archives where I rarely look,
-and "new or unactioned email" in small inboxes that load fast when I need them.
+This config is intended to be fairly safe to use on [pairing
+workstations](http://engineering.pivotal.io/categories/pair-programming/). In
+that environment, we don't want to leave emails or creds on the local disk. With
+no local copies, every time we open a mailbox we're reading data over the
+network, and hence loading large inboxes can be annoyingly slow. It therefore
+makes sense to develop a habit of keeping "read mail" in archives where I rarely
+look, and "new or unactioned email" in small inboxes that load fast when I need
+them.
 
 If you want a mutt config for a machine that only you ever use, this may not be
 for you. You might find you'd prefer to keep copies of your email locally,
