@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+my_dir="$(dirname "$0")"
+basht "$my_dir"/*_test.bash

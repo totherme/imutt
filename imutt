@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+. muttrc-generator.bash
+
 main() {
   local fifo
 
@@ -41,6 +43,8 @@ generate_muttrc() {
   MAILBOXES="$(get_var_from_config "$config_json" "mailboxes")" \
   COLOUR_FILE="$(dirname "$0")/mutt/dracula.muttrc" \
     bash "$template_file"
+
+  make_mbox_hooks_from_mailboxes_list "$(get_var_from_config "$config_json" "mailboxes")"
 }
 
 best_mutt() {
@@ -53,14 +57,6 @@ best_mutt() {
 
 get_config_from_lastpass() {
   lpass show --notes Personal/email-creds
-}
-
-get_var_from_config() {
-  local config varname
-  config="${1:?Expected config json to get a variable from}"
-  varname="${2:?Expected a variable to get from the config}"
-
-  echo "$config" | jq -r ".\"$varname\""
 }
 
 fail() {
