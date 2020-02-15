@@ -10,7 +10,9 @@ This config pulls my IMAP password from lastpass _just_ long enough to pass thro
 - A [lastpass](https://www.lastpass.com/) account
 - The [lpass CLI](https://github.com/lastpass/lastpass-cli)
 - [jq](https://stedolan.github.io/jq/)
-- A terminal with bash, mkfifo, mktemp, etc
+- A terminal with a recent version of bash, mkfifo, mktemp, etc
+  + If you're using a mac, you'll have to `brew install bash` to get a bash
+    newer than version 3.
 
 ## Usage
 
