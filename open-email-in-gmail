@@ -2,8 +2,10 @@
 
 set -euo pipefail
 
+. gmail-helpers.bash
+
 main() {
-  get_message_id | make_gmail_search_url | open_url_from_stdin
+  fix_wraped_messageid | get_message_id | make_gmail_search_url | open_url_from_stdin
 }
 
 get_message_id() {
