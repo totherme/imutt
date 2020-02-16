@@ -74,7 +74,7 @@ inbox-zero-like one. Here's my email workflow:
     the sender and subject that they can be ignored. For these emails, instead of
     hitting `enter` to read them, I hit `d` for `done`. This marks the messages as
     read. It does not delete them.
-  + If there are messages I need to deal with later, I can hit `!` to mark them as
+  + If there are messages I need to deal with later, I can hit `F` to **f**lag them as
     important (like "starring" them in gmail), and add whatever note I need to add
     in an external todo list.
   + If there are messages which aren't filed correctly, I hit `B` to open that
