@@ -16,7 +16,18 @@ This config pulls my IMAP password from lastpass _just_ long enough to pass thro
 
 ## Getting Going
 
-Setup your creds, get these scripts, then run them:
+Get these scripts, setup your creds, then run imutt:
+
+### Get scripts
+
+Clone this repo somewhere, and add that somewhere to your path. For example:
+
+```bash
+git clone https://github.com/totherme/imutt.git ~/bin/imutt
+cd ~/bin/imutt
+git submodule update --init
+echo 'export PATH="$HOME/bin/imutt:$PATH' >> ~/.profile
+```
 
 ### Setup creds
 First, create a lastpass note at path `Personal/email-creds`, with contents like the following:
@@ -34,8 +45,7 @@ First, create a lastpass note at path `Personal/email-creds`, with contents like
 }
 ```
 
-If you only have one inbox, and it's called `INBOX`, then set the `mailboxes`
-line to `""`. I like to have different inboxes for each of my mailing lists.
+The `imutt-edit-creds` script can help with this.
 
 If you're using gmail, you'll have to [enable 2 factor
 auth](https://support.google.com/accounts/answer/185839?hl=en), and [create an
@@ -43,17 +53,6 @@ app specific
 password](https://support.google.com/accounts/answer/185833?hl=en). This is the
 password that you'll need to put in your creds -- *not* your regular google
 password.
-
-### Get scripts
-
-Clone this repo somewhere, and add that somewhere to your path. For example:
-
-```bash
-git clone https://github.com/totherme/imutt.git ~/bin/imutt
-cd ~/bin/imutt
-git submodule update --init
-echo 'export PATH="$HOME/bin/imutt:$PATH' >> ~/.profile
-```
 
 ### Run
 
@@ -64,7 +63,10 @@ imutt
 ## How to use
 
 If you're not familiar with mutt, check out [the
-manual](http://www.mutt.org/doc/manual/).
+manual](http://www.mutt.org/doc/manual/). Note that any [email
+aliases](http://www.mutt.org/doc/manual/#intro-alias) you create will be stored
+in lastpass at the path `Personal/email-aliases`. You can hand-edit this file
+with `imutt-edit-aliases`.
 
 This config adds only a couple of non-standard bindings. My philosophy is an
 inbox-zero-like one. Here's my email workflow:
