@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+
+main() {
+  lpass edit --notes Personal/email-aliases
+}
+
+
+main "${@}"
