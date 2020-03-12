@@ -65,11 +65,18 @@ get_config_from_lastpass() {
 }
 
 get_aliases_from_lastpass() {
+  ensure_lastpass_has_aliases
   lpass show --notes Personal/email-aliases
 }
 
 put_aliases_in_lastpass() {
   lpass edit --notes Personal/email-aliases --non-interactive
+}
+
+ensure_lastpass_has_aliases() {
+  if ! lpass ls Personal/email-aliases | grep email-aliases > /dev/null ; then
+    echo "# vim: ft=muttrc" | lpass add --notes Personal/email-aliases --non-interactive
+  fi
 }
 
 fail() {
