@@ -1,4 +1,6 @@
 # vim: set ft=muttrc
+TMPDIR="${TMPDIR:-/tmp}"
+
 cat <<EOF
 set realname = "$FULL_NAME"
 set from = "$EMAIL"
@@ -41,5 +43,8 @@ source $COLOUR_FILE
 
 set move = "yes"
 set smtp_authenticators='gssapi:login'
+
+set alias_file = "$TMPDIR/mutt_aliases"
+source "$TMPDIR/mutt_aliases"
 
 EOF
