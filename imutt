@@ -16,6 +16,7 @@ main() {
   get_aliases_from_lastpass > "$TMPDIR/mutt_aliases"
   generate_muttrc > "$fifo" &
   best_mutt -F "$fifo" "${@}"
+  put_aliases_in_lastpass < "$TMPDIR/mutt_aliases"
   rm "$TMPDIR/mutt_aliases"
 }
 
@@ -65,6 +66,10 @@ get_config_from_lastpass() {
 
 get_aliases_from_lastpass() {
   lpass show --notes Personal/email-aliases
+}
+
+put_aliases_in_lastpass() {
+  lpass edit --notes Personal/email-aliases --non-interactive
 }
 
 fail() {
