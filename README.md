@@ -14,6 +14,15 @@ This config pulls my IMAP password from lastpass _just_ long enough to pass thro
   + If you're using a mac, you'll have to `brew install bash` to get a bash
     newer than version 3.
 
+If you're on a mac, most of this stuff can be `brew install`ed.
+```sh
+brew install lastpass-cli jq mutt urlview
+```
+
+If you're on linux you'll find similar stuff in your favourite package manager.
+I find that `mutt` works best for me on the mac, and `neomutt` works best for me
+on ubuntu. YMMV.
+
 ## Getting Going
 
 Get these scripts, setup your creds, then run imutt:
