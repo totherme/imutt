@@ -23,10 +23,10 @@ open_url_from_stdin() {
 
   read -r url
 
-  case "${OSTYPE}" in
+  case "${OSTYPE%%[1-9.]*}" in
     "linux-gnu") opener="xdg-open" ;;
     "darwin") opener="open" ;;
-    "*") fail "unknown OS type" ;;
+    *) fail "unknown OS type" ;;
   esac
 
   ${opener} "$url"
