@@ -16,7 +16,7 @@ This config pulls my IMAP password from lastpass _just_ long enough to pass thro
 
 If you're on a mac, most of this stuff can be `brew install`ed.
 ```sh
-brew install lastpass-cli jq mutt urlview
+brew install bash lastpass-cli jq mutt urlview
 ```
 
 If you're on linux you'll find similar stuff in your favourite package manager.
