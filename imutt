@@ -7,17 +7,20 @@ TMPDIR="${TMPDIR:-/tmp}"
 . muttrc-generator.bash
 
 main() {
-  local fifo
+  local fifo aliasfile
 
   check_dependencies
 
   fifo="$(mktemp -u)"
   mkfifo "$fifo"
-  get_aliases_from_lastpass > "$TMPDIR/mutt_aliases"
-  generate_muttrc > "$fifo" &
+
+  aliasfile="$(mktemp "${TMPDIR}/mutt_aliases.XXXXXX")"
+
+  get_aliases_from_lastpass > "${aliasfile}"
+  generate_muttrc "${aliasfile}" > "$fifo" &
   best_mutt -F "$fifo" "${@}"
-  put_aliases_in_lastpass < "$TMPDIR/mutt_aliases"
-  rm "$TMPDIR/mutt_aliases"
+  put_aliases_in_lastpass < "${aliasfile}"
+  rm "${aliasfile}"
 }
 
 check_dependencies() {
@@ -33,7 +36,8 @@ check_dependencies() {
 }
 
 generate_muttrc() {
-  local template_file config_json
+  local aliasfile template_file config_json
+  aliasfile="${1:?"Expected an aliasfile in generate_muttrc"}"
 
   config_json="$(get_config_from_lastpass)"
   template_file="$(dirname "$0")/muttrc.tmpl"
@@ -47,6 +51,7 @@ generate_muttrc() {
   PASSWORD="$(get_var_from_config "$config_json" "password")" \
   MAILBOXES="$(get_var_from_config "$config_json" "mailboxes")" \
   COLOUR_FILE="$(dirname "$0")/mutt/dracula.muttrc" \
+  ALIAS_FILE="${aliasfile}" \
     bash "$template_file"
 
   make_mbox_hooks_from_mailboxes_list "$(get_var_from_config "$config_json" "mailboxes")"
