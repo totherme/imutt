@@ -29,7 +29,7 @@ macro index B "|open-email-in-gmail\n" "Open in Gmail Browser"
 macro pager B "|open-email-in-gmail\n" "Open in Gmail Browser"
 macro index A "T~N\n;WN" "Mark All as Read"
 
-set editor = "vim"
+set editor = "vim -c 'set fo+=w'"
 set charset = "utf-8"
 set record = ""
 set edit_headers = yes
@@ -37,6 +37,7 @@ set mail_check_stats = yes
 set sidebar_format = "%B%*  %N (%F) "
 set sort=threads
 set sort_aux=date
+set text_flowed
 
 source $COLOUR_FILE
 
