@@ -1,9 +1,13 @@
 get_var_from_config() {
-  local config varname
+  local config varname result
   config="${1:?Expected config json to get a variable from}"
   varname="${2:?Expected a variable to get from the config}"
 
-  echo "$config" | jq -r ".\"$varname\""
+  if result="$(echo "$config" | jq -er ".\"$varname\"")" ; then
+    echo "${result}"
+  else
+    echo ""
+  fi
 }
 
 make_mbox_hooks_from_mailboxes_list() {

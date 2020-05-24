@@ -46,7 +46,11 @@ generate_muttrc() {
   EMAIL="$(get_var_from_config "$config_json" "user-email-address")" \
   SMTP_ADDRESS="$(get_var_from_config "$config_json" "smtp-address")" \
   SMTP_PORT="$(get_var_from_config "$config_json" "smtp-port")" \
+  SMTP_METHOD="$(get_var_from_config "$config_json" "smtp-method")" \
   IMAP_ADDRESS="$(get_var_from_config "$config_json" "imap-address")" \
+  IMAP_PORT="$(get_var_from_config "$config_json" "imap-port")" \
+  IMAP_METHOD="$(get_var_from_config "$config_json" "imap-method")" \
+  FORCE_TLS="$(get_var_from_config "$config_json" "force-tls")" \
   USERNAME="$(get_var_from_config "$config_json" "username")" \
   PASSWORD="$(get_var_from_config "$config_json" "password")" \
   MAILBOXES="$(get_var_from_config "$config_json" "mailboxes")" \

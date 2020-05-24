@@ -6,12 +6,12 @@ set from = "$EMAIL"
 set use_from = yes
 set envelope_from = yes
 
-set smtp_url = "smtps://$USERNAME@$SMTP_ADDRESS:$SMTP_PORT"
+set smtp_url = "${SMTP_METHOD:-smtps}://$USERNAME@$SMTP_ADDRESS:$SMTP_PORT"
 set smtp_pass = "$PASSWORD"
 set imap_user = "$USERNAME"
 set imap_pass = "$PASSWORD"
-set folder = "imaps://$IMAP_ADDRESS:993"
-set ssl_force_tls = yes
+set folder = "${IMAP_METHOD:-imaps}://$IMAP_ADDRESS:${IMAP_PORT:-993}"
+set ssl_force_tls = ${FORCE_TLS:-yes}
 set spoolfile = "+INBOX"
 mailboxes $MAILBOXES
 

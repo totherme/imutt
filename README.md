@@ -4,6 +4,9 @@ I want to keep all my email on my email server, and all my creds in lastpass. An
 
 This config pulls my IMAP password from lastpass _just_ long enough to pass through a named-pipe to mutt.
 
+I've seen this work with both Gmail and MS Exchange (through the excellent
+[davmail](http://davmail.sourceforge.net/).)
+
 ## Prereqs
 
 - [Mutt](http://www.mutt.org/) or [Neomutt](https://neomutt.org/)
@@ -13,6 +16,7 @@ This config pulls my IMAP password from lastpass _just_ long enough to pass thro
 - A terminal with a recent version of bash, mkfifo, mktemp, etc
   + If you're using a mac, you'll have to `brew install bash` to get a bash
     newer than version 3.
+- If your email is on an MS Exchange server, you'll also need to install and configure [davmail](http://davmail.sourceforge.net/)
 
 If you're on a mac, most of this stuff can be `brew install`ed.
 ```sh
@@ -20,8 +24,6 @@ brew install bash lastpass-cli jq mutt urlview
 ```
 
 If you're on linux you'll find similar stuff in your favourite package manager.
-I find that `mutt` works best for me on the mac, and `neomutt` works best for me
-on ubuntu. YMMV.
 
 ## Getting Going
 
@@ -62,6 +64,19 @@ app specific
 password](https://support.google.com/accounts/answer/185833?hl=en). This is the
 password that you'll need to put in your creds -- *not* your regular google
 password.
+
+If you're using Exhange and [davmail](http://davmail.sourceforge.net/), you'll
+want to add a few extra fields to your creds JSON to prevent mutt from
+attempting to encrypt your connection to your local proxy:
+
+```json
+{
+  "smtp-method": "smtp",
+  "imap-port": "my davmail local imap port",
+  "imap-method": "imap",
+  "force-tls": "no"
+}
+```
 
 ### Run
 
